@@ -1,11 +1,9 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
 api =  Api(app)
 
-items = [
-]
 class Item(Resource):
 
     def get(self, name):
@@ -14,10 +12,14 @@ class Item(Resource):
                 return item
 
     def post(self, name):
-        item = {'name':name,'price':30}
+        data = request.get_json(silent=True)
+        item = {'name':name,'price':data['price']}
         items.append(item)
         return item
 
-api.add_resource(Item, '/student/<string:name>')
 
 app.run()
+
+items = [
+]
+api.add_resource(Item, '/student/<string:name>')
