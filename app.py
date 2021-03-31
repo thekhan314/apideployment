@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_restful import Resource, Api
+from form import JobEntry
 
 app = Flask(__name__)
 
@@ -9,8 +10,8 @@ items = [
 ]
 @app.route('/')
 def hello():
-    return render_template('form.html', items = items)
-
+    form = JobEntry()
+    return render_template('jobentry.html',form=form)
 
 if __name__ == '__main__':
     app.run()
