@@ -3,9 +3,11 @@ import sqlite3
 connection = sqlite3.connect('animals.db')
 cursor = connection.cursor()
 
-create_tbl = " CREATE TABLE animals (id int,species text,category text)"
+cat = (1,'cat','mammal')
 
-cursor.execute(create_tbl)
+insert_q = "INSERT INTO animals VALUES (?,?,?)"
+
+cursor.execute(insert_q,cat)
 
 connection.commit()
 connection.close()
